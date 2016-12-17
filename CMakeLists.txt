@@ -89,87 +89,9 @@ set(LIBRARY_OUTPUT_PATH  ${CMAKE_CURRENT_BINARY_DIR}/lib)
 #-----------------------------------------------------------------------------
 
 SET(PROJECT_NAME CEPTR)
+SET(CEPTR_SOURCE_FILES)
 
-
-#-----------------------------------------------------------------------------
-
-
-set(CEPTR_SOURCE_FILES
-    src/accumulator.c
-    src/accumulator.h
-    src/ansicolor.h
-    src/base_defs.c
-    src/base_defs.h
-    src/ceptr.h
-    src/ceptr_error.h
-    src/ceptr_types.h
-    src/debug.c
-    src/debug.h
-    src/def.c
-    src/def.h
-    src/group.c
-    src/group.h
-    src/hashfn.c
-    src/hashfn.h
-    src/label.c
-    src/label.h
-    src/mtree.c
-    src/mtree.h
-    src/process.c
-    src/process.h
-    src/protocol.c
-    src/protocol.h
-    src/receptor.c
-    src/receptor.h
-    src/scape.c
-    src/scape.h
-    src/semtable.c
-    src/semtable.h
-    src/semtrex.c
-    src/semtrex.h
-    src/shell.c
-    src/shell.h
-    src/stream.c
-    src/stream.h
-    src/sys_defs.c
-    src/sys_defs.h
-    src/timing_mach.c
-    src/timing_mach.h
-    src/tree.c
-    src/tree.h
-    src/uthash.h
-    src/util.c
-    src/util.h
-    src/vmhost.c
-    src/vmhost.h
-    )
+add_subdirectory(src)
+add_subdirectory(spec)
 
 add_executable(ceptr ${CEPTR_SOURCE_FILES} src/ceptr.c)
-
-set(CEPTR_SPEC_SOURCE_FILES
-    ${CEPTR_SOURCE_FILES}
-    spec/accumulator_spec.h
-    spec/ceptr_specs.c
-    spec/def_spec.h
-    spec/group_spec.h
-    spec/http_example.h
-    spec/label_spec.h
-    spec/mtree_spec.h
-    spec/process_spec.h
-    spec/profile_example.h
-    spec/protocol_spec.h
-    spec/receptor_spec.h
-    spec/scape_spec.h
-    spec/semtable_spec.h
-    spec/semtrex_spec.h
-    spec/spec_utils.c
-    spec/stream_spec.h
-    spec/test_framework.h
-    spec/tree_spec.h
-    spec/vmhost_spec.h
-    spec/fmemopen.c
-    spec/fmemopen.h
-    spec/memstream.c
-    spec/memstream.h)
-
-add_executable(ceptr_spec ${CEPTR_SPEC_SOURCE_FILES})
