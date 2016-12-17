@@ -8,8 +8,13 @@
 
 #include <ctype.h>
 #include <stdio.h>
-#include <time.h>
 #include <stdint.h>
+
+#ifdef __MACH__
+#include "timing_mach.h"
+#else
+#include <time.h>
+#endif
 
 // some basic c utility functions.  Functions in this file have no dependencies on any other src files
 

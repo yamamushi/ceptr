@@ -27,6 +27,15 @@
 #include "debug.h"
 #include "util.h"
 
+#ifndef MSG_NOSIGNAL
+# define MSG_NOSIGNAL 0
+# ifdef SO_NOSIGPIPE
+#  define CEPH_USE_SO_NOSIGPIPE
+# else
+#  error "Cannot block SIGPIPE!"
+# endif
+#endif
+
 char *DELIM_LF = "\n";
 char *DELIM_CRLF = "\r\n";
 
@@ -546,6 +555,16 @@ int _st_write(Stream *st,char *buf,size_t len) {
         }
     }
     else if (st->type == SocketStream) {
+
+#ifdef CEPH_USE_SO_NOSIGPIPE
+        int val = 1;
+        int r = setsockopt(st->data.socket_stream, SOL_SOCKET, SO_NOSIGPIPE, (void*)&val, sizeof(val));
+        if (r) {
+            r = -errno;
+            raise_error("couldn't set SO_NOSIGPIPE");
+        }
+#endif
+
         bytes_written = send(st->data.socket_stream,buf,len,MSG_NOSIGNAL);
     }
     else raise_error("unknown stream type:%d\n",st->type);

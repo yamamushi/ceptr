@@ -6,6 +6,10 @@
 #include "uthash.h"
 #include <stdbool.h>
 
+#ifdef __MACH__
+#include <pthread.h>
+#endif
+
 // NOTE: the actual values of the types matter because they must match the order they show
 // up in the definition trees
 enum SemanticTypes {SEM_TYPE_STRUCTURE=1,SEM_TYPE_SYMBOL,SEM_TYPE_PROCESS,SEM_TYPE_RECEPTOR,SEM_TYPE_PROTOCOL};

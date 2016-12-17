@@ -14,6 +14,7 @@
 SemTable *_sem_new() {
     SemTable * sem= malloc(sizeof(SemTable));
     memset(sem,0,sizeof(SemTable));
+    return sem;
 }
 
 int _sem_new_context(SemTable *sem,T *definitions) {
